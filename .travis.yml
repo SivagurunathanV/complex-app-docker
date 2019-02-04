@@ -17,9 +17,9 @@ after_success:
   # login into docker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # push images to docker hub
+  - docker push sivagurunathan/multi-docker-fib-server
   - docker push sivagurunathan/multi-docker-fib-client
   - docker push sivagurunathan/multi-docker-fib-nginx
-  - docker push sivagurunathan/multi-docker-fib-server
   - docker push sivagurunathan/multi-docker-fib-worker
 
   
