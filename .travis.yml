@@ -1,0 +1,25 @@
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker build -t sivagurunathan/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run sivagurunathan/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t sivagurunathan/multi-docker-fib-client ./client
+  - docker build -t sivagurunathan/multi-docker-fib-nginx ./nginx
+  - docker build -t sivagurunathan/multi-docker-fib-server ./server
+  - docker build -t sivagurunathan/multi-docker-fib-worker ./worker
+  # login into docker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # push images to docker hub
+  - docker push sivagurunathan/multi-docker-fib-client
+  - docker push sivagurunathan/multi-docker-fib-nginx
+  - docker push sivagurunathan/multi-docker-fib-server
+  - docker push sivagurunathan/multi-docker-fib-worker
+
+  
