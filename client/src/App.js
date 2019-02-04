@@ -10,11 +10,8 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
             <Link to="/"> Home </Link>
             <Link to="/secondPage"> SecondPage </Link>
-          </header>
           <div>
             <Route exact path="/" component = {Fib} />
             <Route path="/secondPage" component = {SecondPage} />
